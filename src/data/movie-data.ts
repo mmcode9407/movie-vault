@@ -15,6 +15,8 @@
   vote_count: number;
 };
 
+export type Genre = string;
+
 export const movieData: Movie[] = [
   {
     adult: false,
@@ -84,4 +86,18 @@ export const movieData: Movie[] = [
     vote_average: 7.473,
     vote_count: 274,
   },
+];
+
+export const genres: Genre[] = [
+  "Action",
+  "Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Family",
+  "Fantasy",
+  "History",
+  "Horror",
 ];
