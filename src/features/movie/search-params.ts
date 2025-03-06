@@ -24,10 +24,21 @@ export const ratingOptions = {
   clearOnDefault: true,
 };
 
+export const sortParser = {
+  sortKey: parseAsString.withDefault("popularity"),
+  sortValue: parseAsString.withDefault("desc"),
+};
+
+export const sortOptions = {
+  shallow: false,
+  clearOnDefault: true,
+};
+
 export const searchParamsCache = createSearchParamsCache({
   search: searchParser,
   genre: genreParser,
   ...ratingParser,
+  ...sortParser,
 });
 
 export type ParsedSearchParams = Awaited<
