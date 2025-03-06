@@ -5,8 +5,14 @@ export const searchParser = parseAsString.withDefault("").withOptions({
   clearOnDefault: true,
 });
 
+export const genreParser = parseAsString.withDefault("").withOptions({
+  shallow: false,
+  clearOnDefault: true,
+});
+
 export const searchParamsCache = createSearchParamsCache({
   search: searchParser,
+  genre: genreParser,
 });
 
 export type ParsedSearchParams = Awaited<

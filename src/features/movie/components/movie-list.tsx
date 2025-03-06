@@ -12,9 +12,11 @@ type MovieListProps = {
 };
 
 export const MovieList = async ({ searchParams }: MovieListProps) => {
-  const movies: MovieWithGenresNames[] = searchParams.search
-    ? await getMoviesByTitle(searchParams)
-    : await getMovies();
+  const { search, genre } = searchParams;
+
+  const movies: MovieWithGenresNames[] = search
+    ? await getMoviesByTitle(search)
+    : await getMovies(genre);
 
   return (
     <ul

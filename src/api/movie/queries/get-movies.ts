@@ -3,10 +3,10 @@
 import { fetchGenres } from "../services/fetch-genres";
 import { fetchMovies } from "../services/fetch-movies";
 
-export const getMovies = cache(async () => {
+export const getMovies = cache(async (genre: string) => {
   try {
     const [movieResp, genresResp] = await Promise.all([
-      fetchMovies(),
+      fetchMovies(genre),
       fetchGenres(),
     ]);
 
