@@ -1,4 +1,4 @@
-﻿import { getGenres } from "@/api/movie/queries/get-genres";
+import { getGenres } from "@/api/movie/queries/get-genres";
 import { Separator } from "@/components/ui/separator";
 
 import { MovieGenreFilter } from "./movie-genre-filter";

@@ -1,4 +1,4 @@
-﻿import { getMovies } from "@/api/movie/queries/get-movies";
+import { getMovies } from "@/api/movie/queries/get-movies";
 import { getMoviesByTitle } from "@/api/movie/queries/get-movies-by-title";
 import type { MovieWithGenresNames } from "@/api/movie/types";
 import { Placeholder } from "@/components/placeholder";
