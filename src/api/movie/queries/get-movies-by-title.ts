@@ -4,10 +4,10 @@ import { fetchMoviesByTitle } from "@/api/movie/services/fetch-movies-by-title";
 
 import { fetchGenres } from "../services/fetch-genres";
 
-export const getMoviesByTitle = cache(async (title: string) => {
+export const getMoviesByTitle = cache(async (title: string, page: number) => {
   try {
     const [movieResp, genresResp] = await Promise.all([
-      fetchMoviesByTitle(title),
+      fetchMoviesByTitle(title, page),
       fetchGenres(),
     ]);
 
@@ -20,9 +20,21 @@ export const getMoviesByTitle = cache(async (title: string) => {
       genre_names: movie.genre_ids.map((id) => genreMap.get(id) || "Unknown"),
     }));
 
-    return mappedMovies;
+    return {
+      list: mappedMovies,
+      metadata: {
+        count: movieResp.total_results,
+        hasNextPage: movieResp.page < movieResp.total_pages,
+      },
+    };
   } catch (error) {
     console.error("Error fetching movies", error);
-    return [];
+    return {
+      list: [],
+      metadata: {
+        count: 0,
+        hasNextPage: false,
+      },
+    };
   }
 });

@@ -21,9 +21,21 @@ export const getMovies = cache(async (searchParams: ParsedSearchParams) => {
       genre_names: movie.genre_ids.map((id) => genreMap.get(id) || "Unknown"),
     }));
 
-    return mappedMovies;
+    return {
+      list: mappedMovies,
+      metadata: {
+        count: movieResp.total_results,
+        hasNextPage: movieResp.page < movieResp.total_pages,
+      },
+    };
   } catch (error) {
     console.error("Error fetching movies", error);
-    return [];
+    return {
+      list: [],
+      metadata: {
+        count: 0,
+        hasNextPage: false,
+      },
+    };
   }
 });

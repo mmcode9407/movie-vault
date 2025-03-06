@@ -34,11 +34,17 @@ export const sortOptions = {
   clearOnDefault: true,
 };
 
+export const pageParser = parseAsInteger.withDefault(1).withOptions({
+  shallow: false,
+  clearOnDefault: true,
+});
+
 export const searchParamsCache = createSearchParamsCache({
   search: searchParser,
   genre: genreParser,
   ...ratingParser,
   ...sortParser,
+  page: pageParser,
 });
 
 export type ParsedSearchParams = Awaited<
