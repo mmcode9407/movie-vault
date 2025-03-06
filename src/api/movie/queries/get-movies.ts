@@ -1,12 +1,14 @@
 ﻿import { cache } from "react";
 
+import type { ParsedSearchParams } from "@/features/movie/search-params";
+
 import { fetchGenres } from "../services/fetch-genres";
 import { fetchMovies } from "../services/fetch-movies";
 
-export const getMovies = cache(async (genre: string) => {
+export const getMovies = cache(async (searchParams: ParsedSearchParams) => {
   try {
     const [movieResp, genresResp] = await Promise.all([
-      fetchMovies(genre),
+      fetchMovies(searchParams),
       fetchGenres(),
     ]);
 
