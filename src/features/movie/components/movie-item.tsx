@@ -43,7 +43,7 @@ export const MovieItem = ({ movie }: MovieItemProps) => {
 
             <div className="flex justify-between items-center mt-1">
               <span className="text-gray-400">
-                {getFullYear(movie.release_date)}
+                {getFullYear(movie.release_date) || "N/A"}
               </span>
 
               <div className="flex gap-1">

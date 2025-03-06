@@ -1,7 +1,9 @@
-﻿import { fetchGenres } from "../services/fetch-genres";
+﻿import { cache } from "react";
+
+import { fetchGenres } from "../services/fetch-genres";
 import { fetchMovies } from "../services/fetch-movies";
 
-export const getMovies = async () => {
+export const getMovies = cache(async () => {
   try {
     const [movieResp, genresResp] = await Promise.all([
       fetchMovies(),
@@ -22,4 +24,4 @@ export const getMovies = async () => {
     console.error("Error fetching movies", error);
     return [];
   }
-};
+});

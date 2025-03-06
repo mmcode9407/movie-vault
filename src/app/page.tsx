@@ -1,3 +1,4 @@
+import type { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 
 import { Heading } from "@/components/heading";
@@ -5,8 +6,13 @@ import { Spinner } from "@/components/spinner";
 import { MovieFilters } from "@/features/movie/components/movie-filters/movie-filters";
 import { MovieList } from "@/features/movie/components/movie-list";
 import { MovieSearchInput } from "@/features/movie/components/movie-search-input";
+import { searchParamsCache } from "@/features/movie/search-params";
 
-export default function Home() {
+type HomePageProps = {
+  searchParams: Promise<SearchParams>;
+};
+
+export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <>
       <MovieFilters />
@@ -17,7 +23,9 @@ export default function Home() {
         <MovieSearchInput placeholder="Search movies by title..." />
 
         <Suspense fallback={<Spinner />}>
-          <MovieList />
+          <MovieList
+            searchParams={searchParamsCache.parse(await searchParams)}
+          />
         </Suspense>
       </div>
     </>
