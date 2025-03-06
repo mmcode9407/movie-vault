@@ -15,7 +15,11 @@ type HomePageProps = {
 export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <>
-      <MovieFilters />
+      <div className="w-full md:w-1/4 gap-y-6 flex flex-col">
+        <Heading title="Filters" />
+
+        <MovieFilters />
+      </div>
 
       <div className="w-full md:w-3/4 flex flex-col gap-6">
         <Heading title="Movies" description="Search for your favorite movies" />
