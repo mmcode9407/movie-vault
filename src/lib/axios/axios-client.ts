@@ -1,15 +1,13 @@
 ﻿import axios from "axios";
 
-import { requestInterceptors } from "@/lib/axios/request-interceptors";
-
 const axiosClient = axios.create({
   baseURL: process.env.REST_API_URL,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
+    Authorization: `Bearer ${process.env.REST_API_KEY}`,
   },
 });
-
-axiosClient.interceptors.request.use(requestInterceptors);
 
 export default axiosClient;
