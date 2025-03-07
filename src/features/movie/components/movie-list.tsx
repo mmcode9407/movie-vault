@@ -20,20 +20,24 @@ export const MovieList = async ({ searchParams }: MovieListProps) => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <MoviePagination paginatedMovieMetadata={movieMetadata} />
+      {movies.length > 0 ? (
+        <>
+          <MoviePagination paginatedMovieMetadata={movieMetadata} />
 
-      <ul
-        className={cn("grid grid-cols-1 gap-6", {
-          "sm:grid-cols-2 lg:grid-cols-3": !!movies.length,
-        })}>
-        {movies.length > 0 ? (
-          movies.map((movie) => <MovieItem key={movie.id} movie={movie} />)
-        ) : (
-          <Placeholder label="No movies found" />
-        )}
-      </ul>
+          <ul
+            className={cn("grid grid-cols-1 gap-6", {
+              "sm:grid-cols-2 lg:grid-cols-3": !!movies.length,
+            })}>
+            {movies.map((movie) => (
+              <MovieItem key={movie.id} movie={movie} />
+            ))}
+          </ul>
 
-      <MoviePagination paginatedMovieMetadata={movieMetadata} />
+          <MoviePagination paginatedMovieMetadata={movieMetadata} />
+        </>
+      ) : (
+        <Placeholder label="No movies found" />
+      )}
     </div>
   );
 };
