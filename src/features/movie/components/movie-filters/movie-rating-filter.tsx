@@ -29,26 +29,32 @@ export const MovieRatingFilter = () => {
   );
 
   const handleRatingClick = ({ value, dir }: Rating) => {
-    if (value === ratingFilter.ratingKey && dir === ratingFilter.ratingDir) {
-      setRatingFilter({ ratingKey: null, ratingDir: null });
-    } else {
-      setRatingFilter({ ratingKey: value, ratingDir: dir });
-    }
+    const isSameRatingAndDir =
+      value === ratingFilter.ratingKey && dir === ratingFilter.ratingDir;
+
+    setRatingFilter(
+      isSameRatingAndDir
+        ? { ratingKey: null, ratingDir: null }
+        : { ratingKey: value, ratingDir: dir },
+    );
   };
 
   return (
     <FilterSection title="Ratings">
-      {ratings.map((rating) => (
-        <FilterChipButton
-          key={rating.label}
-          label={rating.label}
-          isActive={
-            rating.value === ratingFilter.ratingKey &&
-            rating.dir === ratingFilter.ratingDir
-          }
-          onClick={() => handleRatingClick(rating)}
-        />
-      ))}
+      {ratings.map((rating) => {
+        const isActive =
+          rating.value === ratingFilter.ratingKey &&
+          rating.dir === ratingFilter.ratingDir;
+
+        return (
+          <FilterChipButton
+            key={rating.label}
+            label={rating.label}
+            isActive={isActive}
+            onClick={() => handleRatingClick(rating)}
+          />
+        );
+      })}
     </FilterSection>
   );
 };
