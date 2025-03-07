@@ -6,15 +6,22 @@
 } from "lucide-react";
 import Image from "next/image";
 
-import type { MovieDetailed } from "@/api/movie/types";
+import type { Cast, Crew, MovieDetailed } from "@/api/movie/types";
 import { Badge } from "@/components/ui/badge";
+import { MovieActors } from "@/features/movie/components/movie-actors";
 import { getFullYear } from "@/utils/date";
+
+type MovieCredits = {
+  cast: Cast[];
+  crew: Crew[];
+};
 
 type MovieDetailsProps = {
   movie: MovieDetailed;
+  credits: MovieCredits;
 };
 
-export const MovieDetails = ({ movie }: MovieDetailsProps) => {
+export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
   return (
     <div className="grid sm:grid-cols-[300px_1fr] gap-8">
       <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
@@ -85,6 +92,8 @@ export const MovieDetails = ({ movie }: MovieDetailsProps) => {
 
           <p className="text-muted-foreground">{movie.overview}</p>
         </div>
+
+        <MovieActors cast={credits.cast} />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getMovieById } from "@/api/movie/queries/get-movie-by-id";
+import { getMovieCredits } from "@/api/movie/queries/get-movie-credits";
 import { MovieDetails } from "@/features/movie/components/movie-details";
 import { homePath } from "@/paths";
 
@@ -14,7 +15,10 @@ export default async function MovieDetailsPage({
   params,
 }: MovieDetailsPageProps) {
   const { id } = await params;
-  const movie = await getMovieById(id);
+  const [movie, credits] = await Promise.all([
+    getMovieById(id),
+    getMovieCredits(id),
+  ]);
 
   if (!movie) notFound();
 
@@ -27,7 +31,7 @@ export default async function MovieDetailsPage({
         Back to movies
       </Link>
 
-      <MovieDetails movie={movie} />
+      <MovieDetails movie={movie} credits={credits} />
     </section>
   );
 }
