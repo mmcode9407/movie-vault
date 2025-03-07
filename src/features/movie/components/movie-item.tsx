@@ -2,19 +2,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import type { MovieWithGenresNames } from "@/api/movie/types";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Movie } from "@/data/movie-data";
+import { moviePath } from "@/paths";
 import { getFullYear } from "@/utils/date";
 
 type MovieItemProps = {
-  movie: Movie;
+  movie: MovieWithGenresNames;
 };
 
 export const MovieItem = ({ movie }: MovieItemProps) => {
   return (
     <li key={movie.id}>
-      <Link href={`/movies/${movie.id}`}>
+      <Link href={moviePath(movie.id.toString())}>
         <Card className="overflow-hidden h-full gap-2 py-0 group hover:scale-105 transition-transform duration-300">
           <div className="relative aspect-[2/3] overflow-hidden">
             <Image
@@ -24,6 +25,7 @@ export const MovieItem = ({ movie }: MovieItemProps) => {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               width={350}
               height={50}
+              priority
             />
 
             <div className="absolute top-2 right-2 bg-primary/70 text-primary-foreground px-2 py-1 rounded-md flex items-center">
@@ -41,11 +43,11 @@ export const MovieItem = ({ movie }: MovieItemProps) => {
 
             <div className="flex justify-between items-center mt-1">
               <span className="text-gray-400">
-                {getFullYear(movie.release_date)}
+                {getFullYear(movie.release_date) || "N/A"}
               </span>
 
               <div className="flex gap-1">
-                {movie.genres.slice(0, 2).map((genre) => (
+                {movie.genre_names.slice(0, 2).map((genre) => (
                   <Badge key={genre} variant="secondary">
                     {genre}
                   </Badge>

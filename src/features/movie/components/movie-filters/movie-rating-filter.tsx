@@ -1,5 +1,10 @@
-﻿import { FilterChipButton } from "@/components/filters/filter-chip-button";
+"use client";
+
+import { useQueryStates } from "nuqs";
+
+import { FilterChipButton } from "@/components/filters/filter-chip-button";
 import { FilterSection } from "@/components/filters/filter-section";
+import { ratingOptions, ratingParser } from "@/features/movie/search-params";
 
 type Rating = {
   label: string;
@@ -18,15 +23,38 @@ const ratings: Rating[] = [
 ];
 
 export const MovieRatingFilter = () => {
+  const [ratingFilter, setRatingFilter] = useQueryStates(
+    ratingParser,
+    ratingOptions,
+  );
+
+  const handleRatingClick = ({ value, dir }: Rating) => {
+    const isSameRatingAndDir =
+      value === ratingFilter.ratingKey && dir === ratingFilter.ratingDir;
+
+    setRatingFilter(
+      isSameRatingAndDir
+        ? { ratingKey: null, ratingDir: null }
+        : { ratingKey: value, ratingDir: dir },
+    );
+  };
+
   return (
     <FilterSection title="Ratings">
-      {ratings.map((rating) => (
-        <FilterChipButton
-          key={rating.label}
-          label={rating.label}
-          isActive={false}
-        />
-      ))}
+      {ratings.map((rating) => {
+        const isActive =
+          rating.value === ratingFilter.ratingKey &&
+          rating.dir === ratingFilter.ratingDir;
+
+        return (
+          <FilterChipButton
+            key={rating.label}
+            label={rating.label}
+            isActive={isActive}
+            onClick={() => handleRatingClick(rating)}
+          />
+        );
+      })}
     </FilterSection>
   );
 };

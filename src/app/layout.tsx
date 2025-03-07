@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
@@ -24,13 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${montserrat.className} antialiased`}>
-        <ThemeProvider>
-          <Header />
+        <NuqsAdapter>
+          <ThemeProvider>
+            <Header />
 
-          <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-20 px-8 flex flex-col md:flex-row gap-8 max-w-[1200px] mx-auto">
-            {children}
-          </main>
-        </ThemeProvider>
+            <main className="min-h-screen flex-1 overflow-y-auto overflow-x-hidden py-20 px-8 flex flex-col md:flex-row gap-8 max-w-[1200px] mx-auto">
+              {children}
+            </main>
+          </ThemeProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
