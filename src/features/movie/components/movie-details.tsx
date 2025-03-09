@@ -5,10 +5,11 @@
   LucideStar,
 } from "lucide-react";
 import Image from "next/image";
+import { Fragment } from "react";
 
 import type { Cast, Crew, MovieDetailed } from "@/api/movie/types";
 import { Badge } from "@/components/ui/badge";
-import { MovieActors } from "@/features/movie/components/movie-actors";
+import { MovieActorList } from "@/features/movie/components/movie-actor-list";
 import { getFullYear } from "@/utils/date";
 
 type MovieCredits = {
@@ -22,14 +23,21 @@ type MovieDetailsProps = {
 };
 
 export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
+  const moviePosterUrl = movie.poster_path
+    ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+    : "/placeholder.png";
+
+  const movieRating = movie.vote_average
+    ? movie.vote_average.toFixed(1)
+    : "No ratings yet";
+
+  const movieReleaseYear = getFullYear(movie.release_date) || "N/A";
+
   return (
     <div className="grid sm:grid-cols-[300px_1fr] gap-8">
       <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
         <Image
-          src={
-            `https://image.tmdb.org/t/p/original/${movie.poster_path}` ||
-            "/placeholder.png"
-          }
+          src={moviePosterUrl}
           alt={movie.title}
           fill
           className="object-cover"
@@ -45,9 +53,7 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
           <div className="inline-flex items-center gap-x-1">
             <LucideStar className="size-5 fill-yellow-400 text-yellow-400" />
 
-            <span className="font-medium">
-              {movie.vote_average.toFixed(1)}/10
-            </span>
+            <span className="font-medium">{movieRating}</span>
           </div>
 
           <div className="inline-flex items-center gap-x-1">
@@ -59,9 +65,7 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
           <div className="inline-flex items-center gap-x-1">
             <LucideCalendar className="size-5 text-muted-foreground" />
 
-            <span className="text-muted-foreground">
-              {getFullYear(movie.release_date)}
-            </span>
+            <span className="text-muted-foreground">{movieReleaseYear}</span>
           </div>
 
           <div className="inline-flex items-center gap-x-1">
@@ -69,11 +73,11 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
 
             <div className="flex items-center gap-x-0.5 text-muted-foreground">
               {movie.origin_country.map((country) => (
-                <>
-                  <span key={country}>{country}</span>
+                <Fragment key={country}>
+                  <span>{country}</span>
 
                   <span className="last:hidden">|</span>
-                </>
+                </Fragment>
               ))}
             </div>
           </div>
@@ -93,7 +97,7 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
           <p className="text-muted-foreground">{movie.overview}</p>
         </div>
 
-        <MovieActors cast={credits.cast} />
+        <MovieActorList cast={credits.cast} />
       </div>
     </div>
   );
