@@ -19,7 +19,7 @@ type MovieCredits = {
 
 type MovieDetailsProps = {
   movie: MovieDetailed;
-  credits: MovieCredits;
+  credits?: MovieCredits;
 };
 
 export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
@@ -97,7 +97,7 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
           <p className="text-muted-foreground">{movie.overview}</p>
         </div>
 
-        <MovieActorList cast={credits.cast} />
+        {credits && <MovieActorList cast={credits.cast} />}
       </div>
     </div>
   );

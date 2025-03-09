@@ -1,5 +1,4 @@
 import { getMovies } from "@/api/movie/queries/get-movies";
-import { getMoviesByTitle } from "@/api/movie/queries/get-movies-by-title";
 import { Placeholder } from "@/components/placeholder";
 import { MoviePagination } from "@/features/movie/components/movie-pagination";
 import type { ParsedSearchParams } from "@/features/movie/search-params";
@@ -12,11 +11,8 @@ type MovieListProps = {
 };
 
 export const MovieList = async ({ searchParams }: MovieListProps) => {
-  const { search, page } = searchParams;
-
-  const { list: movies, metadata: movieMetadata } = search
-    ? await getMoviesByTitle(search, page)
-    : await getMovies(searchParams);
+  const { list: movies, metadata: movieMetadata } =
+    await getMovies(searchParams);
 
   return (
     <div className="flex flex-col gap-y-4 animate-fade-in-from-top">

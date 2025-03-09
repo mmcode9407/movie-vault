@@ -8,7 +8,7 @@ export const getMovieById = cache(async (movieId: string) => {
 
     return movieResp;
   } catch (error) {
-    console.error("Error fetching movie", error);
+    console.error("Error fetching movie:", error);
     return null;
   }
 });

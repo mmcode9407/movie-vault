@@ -6,17 +6,23 @@ import axiosClient from "@/lib/axios/axios-client";
 import type { GetMoviesResponse } from "../types";
 
 export const fetchMovies = async (searchParams: ParsedSearchParams) => {
-  const { genre, ratingDir, ratingKey, sortKey, sortValue, page } =
+  const { search, genre, ratingDir, ratingKey, sortKey, sortValue, page } =
     searchParams;
 
-  return (
-    await axiosClient.get<GetMoviesResponse>("/discover/movie", {
-      params: {
-        page,
-        with_genres: genre,
-        [`vote_average.${ratingDir}`]: ratingKey,
-        sort_by: `${sortKey}.${sortValue}`,
-      },
-    })
-  ).data;
+  const params = {
+    page,
+    ...(search
+      ? { query: search }
+      : {
+          with_genres: genre,
+          [`vote_average.${ratingDir}`]: ratingKey,
+          sort_by: `${sortKey}.${sortValue}`,
+        }),
+  };
+
+  const url = search ? "/search/movie" : "/discover/movie";
+
+  const response = await axiosClient.get<GetMoviesResponse>(url, { params });
+
+  return response.data;
 };

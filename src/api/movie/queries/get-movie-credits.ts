@@ -11,10 +11,6 @@ export const getMovieCredits = cache(async (movieId: string) => {
       crew: movieCreditsResp.crew,
     };
   } catch (error) {
-    console.error("Error fetching movie", error);
-    return {
-      cast: [],
-      crew: [],
-    };
+    console.error("Error fetching movie credits:", error);
   }
 });
