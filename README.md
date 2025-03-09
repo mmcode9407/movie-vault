@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Movie Vault
 
-## Getting Started
+A simple web application for browsing movie list, fetched from [The Movie Database](https://www.themoviedb.org/).  
+Built with **Next.js**, using **TypeScript, Tailwind CSS, and ShadCN**.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✅ Fetching and displaying a list of movies  
+✅ Homepage with movie listing  
+✅ Movie details page  
+✅ Filtering by genre and rating  
+✅ Sorting movies (popularity, release year, average vote)  
+✅ Search by title  
+✅ Expand/collapse animations  
+✅ Error handling and loading states
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technologies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ShadCN](https://ui.shadcn.com/)
+- [Axios](https://axios-http.com/) – API communication
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Installation & Setup
 
-## Learn More
+1. **Clone the repository:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/mmcode9407/movie-vault.git
+   cd movie-vault
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Set environmental variables:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - In the .env file, add your API key from TheMovieDB and base API url:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```ini
+   REST_API_KEY=your_api_key_here
+
+   REST_API_URL=https://api.themoviedb.org/3
+   ```
+
+4. **Run the application:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at http://localhost:3000.
+
+# 🌍 Live Demo
+
+The app is deployed online: [MovieVault](https://movie-vault-ten.vercel.app/)
+
+# 📜 Data Source
+
+Movie data is fetched from TMDB API.
