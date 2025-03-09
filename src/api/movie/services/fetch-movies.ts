@@ -22,7 +22,5 @@ export const fetchMovies = async (searchParams: ParsedSearchParams) => {
 
   const url = search ? "/search/movie" : "/discover/movie";
 
-  const response = await axiosClient.get<GetMoviesResponse>(url, { params });
-
-  return response.data;
+  return (await axiosClient.get<GetMoviesResponse>(url, { params })).data;
 };

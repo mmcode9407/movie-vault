@@ -39,7 +39,7 @@ const SortSelect = ({ options, value, onSelect }: SortSelectProps) => {
     <Select
       onValueChange={handleSort}
       defaultValue={value.sortKey + "&" + value.sortValue}>
-      <SelectTrigger>
+      <SelectTrigger className="min-w-36">
         <SelectValue />
       </SelectTrigger>
 
