@@ -1,4 +1,6 @@
-﻿import axiosClient from "@/lib/axios/axios-client";
+﻿"use server";
+
+import axiosClient from "@/lib/axios/axios-client";
 
 import type { GetMovieCastResponse } from "../types";
 

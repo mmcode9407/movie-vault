@@ -9,7 +9,7 @@ export const MovieFilters = async () => {
 
   return (
     <div className="w-full gap-y-6 flex flex-col">
-      <MovieGenreFilter genres={genres} />
+      <MovieGenreFilter genres={genres || []} />
 
       <Separator />
 

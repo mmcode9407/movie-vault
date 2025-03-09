@@ -20,18 +20,22 @@ export const MovieGenreFilter = ({ genres }: MovieGenreFilterProps) => {
 
   return (
     <FilterSection title="Genres">
-      {genres.map((genre) => {
-        const isActive = genre.id.toString() === genreFilter;
+      {genres.length > 0 ? (
+        genres.map((genre) => {
+          const isActive = genre.id.toString() === genreFilter;
 
-        return (
-          <FilterChipButton
-            key={genre.id}
-            label={genre.name}
-            isActive={isActive}
-            onClick={() => handleGenreClick(genre.id.toString())}
-          />
-        );
-      })}
+          return (
+            <FilterChipButton
+              key={genre.id}
+              label={genre.name}
+              isActive={isActive}
+              onClick={() => handleGenreClick(genre.id.toString())}
+            />
+          );
+        })
+      ) : (
+        <p>No genres found</p>
+      )}
     </FilterSection>
   );
 };

@@ -16,7 +16,7 @@ export const genreParser = parseAsString.withDefault("").withOptions({
 
 export const ratingParser = {
   ratingKey: parseAsInteger.withDefault(0),
-  ratingDir: parseAsString.withDefault(""),
+  ratingDir: parseAsString.withDefault("gte"),
 };
 
 export const ratingOptions = {

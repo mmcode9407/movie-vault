@@ -8,7 +8,6 @@ export const getGenres = cache(async () => {
 
     return genresResp.genres;
   } catch (error) {
-    console.error("Error fetching genres", error);
-    return [];
+    console.error("Error fetching genres:", error);
   }
 });
