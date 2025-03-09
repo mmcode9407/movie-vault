@@ -34,7 +34,7 @@ export const MovieDetails = ({ movie, credits }: MovieDetailsProps) => {
   const movieReleaseYear = getFullYear(movie.release_date) || "N/A";
 
   return (
-    <div className="grid sm:grid-cols-[300px_1fr] gap-8">
+    <div className="grid sm:grid-cols-[300px_1fr] gap-8 animate-fade-in-from-top">
       <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
         <Image
           src={moviePosterUrl}

@@ -37,7 +37,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         })}>
         <Heading title="Movies" description="Search for your favorite movies" />
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div
+          className={cn("flex flex flex-col sm:flex-row gap-4", {
+            "w-full lg:w-1/2 ": isSearchedByTitle,
+          })}>
           <MovieSearchInput placeholder="Search movies by title..." />
 
           {!isSearchedByTitle && (
