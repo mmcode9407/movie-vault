@@ -1,4 +1,5 @@
 ﻿import { LucideArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -9,6 +10,18 @@ import { homePath } from "@/paths";
 
 type MovieDetailsPageProps = {
   params: Promise<{ id: string }>;
+};
+
+export const generateMetadata = async ({
+  params,
+}: MovieDetailsPageProps): Promise<Metadata> => {
+  const { id } = await params;
+  const movie = await getMovieById(id);
+
+  return {
+    title: movie?.title || "Movie not found",
+    description: movie?.overview || "",
+  };
 };
 
 export default async function MovieDetailsPage({
