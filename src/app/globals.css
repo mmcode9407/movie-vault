@@ -114,6 +114,40 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme {
+  --animate-collapsible-down: collapsibleDown 0.5s ease-out;
+  --animate-collapsible-up: collapsibleUp 0.5s ease-out;
+  --animate-fade-in-from-top: fadeInFromTop 0.5s ease-out;
+
+  @keyframes collapsibleDown {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapsibleUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes fadeInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;

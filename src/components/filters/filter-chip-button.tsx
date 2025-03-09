@@ -18,7 +18,8 @@ export const FilterChipButton = ({
     <Button
       size="sm"
       className={cn("rounded-full", {
-        "bg-muted text-muted-foreground": isActive,
+        "bg-chart-2": isActive,
+        "hover:bg-chart-2/90": isActive,
       })}
       onClick={onClick}>
       {label}
